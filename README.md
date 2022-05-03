@@ -1,8 +1,24 @@
 # react-native-linea
 
 # INSTALLATION
-```npm i react-native-linea --save```
+```npm i git@github.com:fordnike/react-native-linea.git --save```
 
+``` cd /ios pod install```
+
+```Add ExternalAccessory.framework```
+
+##### Open your info.plist file as source code and add the following lines: 
+  ```<key>Supported external accessory protocols</key>
+    <value>
+    <array>
+        <string>com.datecs.linea.pro.msr</string>
+        <string>com.datecs.linea.pro.bar</string>
+        <string>com.datecs.printer.escpos</string>
+        <string>com.datecs.iserial.communication</string>
+        <string>com.datecs.pinpad</string>
+    </array>
+    </value>
+```
 Read this:
 http://stackoverflow.com/questions/13935378/how-do-i-use-the-linea-pro-sdk-for-ios
 Especially the 2nd answer (its more recent than the other one)
