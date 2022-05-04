@@ -1,6 +1,6 @@
 {
   "name": "react-native-linea",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React Native wrapper for Linea Pro SDK",
   "main": "LineaPro.js",
   "repository": "git@github.com:fordnike/react-native-linea.git",
