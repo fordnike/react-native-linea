@@ -21,6 +21,25 @@ export default class LineaPro {
     initialize() {
         Linea.initializeScanner();
     }
+    disconnect() {
+        Linea.disconnect();
+    }
+
+    barcodeStartScan() {
+        Linea.barcodeStartScan();
+    }
+
+    barcodeStopScan() {
+        Linea.barcodeStopScan();
+    }
+
+    getModule() {
+        return Linea;
+    }
+
+    getBatteryInfo(callback) {
+        Linea.getBatteryInfo(callback);
+    }
 
     setBarcodeScanMode(mode) {
         Linea.setBarcodeScanMode(mode);
