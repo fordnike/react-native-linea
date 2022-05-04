@@ -19,7 +19,7 @@ RCT_EXPORT_MODULE();
 
 + (BOOL)requiresMainQueueSetup
 {
-    return YES;
+    return NO;
 }
 
 #pragma mark Events
@@ -75,6 +75,53 @@ RCT_EXPORT_METHOD(initializeScanner) {
     rfidOn = NO;
     [self sendDebug:[[NSProcessInfo processInfo] globallyUniqueString]];
 }
+RCT_EXPORT_METHOD(disconnect) {
+  [linea disconnect];
+}
+
+RCT_EXPORT_METHOD(barcodeStartScan) {
+    [linea barcodeStartScan:nil];
+}
+
+RCT_EXPORT_METHOD(barcodeStopScan) {
+    [linea barcodeStopScan:nil];
+}
+
+RCT_REMAP_METHOD(isPresent, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+  BOOL present = [self isBarcodeScannerPresent];
+  //RCTLogInfo(@"Checks if accessory is present %@", present);
+  resolve([NSNumber numberWithBool:present]);
+}
+
+RCT_REMAP_METHOD(getCharging, resolverCharging:(RCTPromiseResolveBlock)resolve rejecterCharging:(RCTPromiseRejectBlock)reject) {
+  BOOL isCharging;
+  [linea getCharging:&isCharging error:nil];
+  //RCTLogInfo(@"Charging is %@", isCharging);
+  resolve([NSNumber numberWithBool:isCharging]);
+}
+
+RCT_REMAP_METHOD(setCharging, isEnabled:(BOOL)enabled resolverSetCharging:(RCTPromiseResolveBlock)resolve rejecterSetCharging:(RCTPromiseRejectBlock)reject) {
+  NSError* error = nil;
+  BOOL result = [linea setCharging:enabled error:&error];
+  if (result) {
+    resolve([NSNumber numberWithBool:result]);
+  } else {
+    NSString *errorDescription = [error.userInfo valueForKey:NSLocalizedDescriptionKey];
+    //RCTLogInfo(@"Set charging fail %@", errorDescription);
+    reject(@"no_charging", errorDescription, error);
+  }
+}
+
+RCT_EXPORT_METHOD(getBatteryInfo:(RCTResponseSenderBlock)callback) {
+  int capacity = 100;
+  DTBatteryInfo *info = [linea getConnectedDeviceBatteryInfo:DEVICE_TYPE_LINEA error:nil];
+  if (info) {
+    capacity = info.capacity;
+  } else {
+    capacity = -1;
+  }
+  callback(@[[NSNull null], [NSNumber numberWithInt:(capacity)]]);
+}
 
 RCT_EXPORT_METHOD(scanRfId) {
     [linea connect];
@@ -88,7 +135,13 @@ RCT_EXPORT_METHOD(setBarcodeScanMode:(int) mode) {
 }
 
 RCT_EXPORT_METHOD(setBarcodeScanBeep:(BOOL) enabled) {
+   int beep[] = {2730,150,65000,20,2730,150};
+  if (enabled) {
+    [linea barcodeSetScanBeep:enabled volume:100 beepData:beep length:sizeof(beep) error:nil];
+    [linea playSound:100 beepData:beep length:sizeof(beep) error:nil];
+  } else {
     [linea barcodeSetScanBeep:enabled volume:0 beepData:nil length:0 error:nil];
+  }
 }
 
 RCT_EXPORT_METHOD(setBarcodeScanButtonMode:(int) mode) {
@@ -103,6 +156,24 @@ RCT_EXPORT_METHOD(playSound:(int) volume beepData:(NSArray *) beepData) {
     }
     
     [linea playSound:volume beepData:finalData length:sizeof(finalData) error:nil];
+}
+
+#pragma mark - Tools
+
+//==============================================================================
+
+
+- (BOOL)isBarcodeScannerPresent
+{
+    return [linea isPresent:DEVICE_TYPE_LINEA];
+}
+
+//==============================================================================
+
+
+- (NSString *)connectedDeviceName
+{
+  return [linea deviceName];
 }
 
 #pragma mark DTDevices delegates
@@ -149,6 +220,10 @@ RCT_EXPORT_METHOD(playSound:(int) volume beepData:(NSArray *) beepData) {
 
 -(void)barcodeData:(NSString *)barcode type:(int) type {
     [self sendBarcodeInfo:barcode];
+}
+- (void)barcodeData:(NSString *)barcode isotype:(NSString *)isotype
+{
+  [self sendBarcodeInfo:barcode];
 }
 
 @end
