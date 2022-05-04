@@ -8,7 +8,7 @@ s.name                 = 'LineaPro'
 s.version              = package['version']
 s.summary              = package['description']
 s.license              = package['license']
-s.homepage             = 'https://github.com/el-angel/react-native-linea'
+s.homepage             = 'https://github.com/fordnike/react-native-linea'
 s.authors              = package['author']
 s.source               = { :git => 'https://github.com/fordnike/react-native-linea.git', :tag => s.version }
 s.source_files         = '*.{h,m}','react-native-linea/*.{h,m}'
