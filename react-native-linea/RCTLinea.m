@@ -72,7 +72,8 @@ RCT_EXPORT_METHOD(initializeScanner) {
     linea = [DTDevices sharedDevice];
     [linea setDelegate:self];
     [linea connect];
-    rfidOn = NO;
+    [linea setPassThroughSync:FALSE error:nil];
+    rfidOn = YES;
     [self sendDebug:[[NSProcessInfo processInfo] globallyUniqueString]];
 }
 RCT_EXPORT_METHOD(disconnect) {
