@@ -93,7 +93,7 @@ class Test extends React.Component {
     }
 
     activateScanner() {
-        this.linea.scanRfId();
+        this.linea.scanRf();
     }
 
     connectionStateListener(data) {
