@@ -12,6 +12,8 @@
 		17B4EBF11E165D3B00E47CA5 /* RCTLinea.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 17B4EBEE1E165D3B00E47CA5 /* RCTLinea.h */; };
 		17B4ECE41E16B80000E47CA5 /* DTDevices.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 17B4ECE31E16B80000E47CA5 /* DTDevices.h */; };
 		17B4ECE71E16B81100E47CA5 /* libdtdev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B4ECE61E16B81100E47CA5 /* libdtdev.a */; };
+		80A8B6C228240984002D1C64 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A8B6C128240983002D1C64 /* CoreLocation.framework */; };
+		80A8B6C4282409A5002D1C64 /* InfineaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A8B6C3282409A5002D1C64 /* InfineaSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +37,8 @@
 		17B4EBEF1E165D3B00E47CA5 /* RCTLinea.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTLinea.m; sourceTree = "<group>"; };
 		17B4ECE31E16B80000E47CA5 /* DTDevices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DTDevices.h; path = ../DTDevices.h; sourceTree = "<group>"; };
 		17B4ECE61E16B81100E47CA5 /* libdtdev.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdtdev.a; sourceTree = "<group>"; };
+		80A8B6C128240983002D1C64 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		80A8B6C3282409A5002D1C64 /* InfineaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InfineaSDK.framework; path = "react-native-linea/InfineaSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1714BFEA1E1A870C00626087 /* ExternalAccessory.framework in Frameworks */,
+				80A8B6C228240984002D1C64 /* CoreLocation.framework in Frameworks */,
+				80A8B6C4282409A5002D1C64 /* InfineaSDK.framework in Frameworks */,
 				17B4ECE71E16B81100E47CA5 /* libdtdev.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,6 +86,8 @@
 		17B4ECE51E16B81100E47CA5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				80A8B6C3282409A5002D1C64 /* InfineaSDK.framework */,
+				80A8B6C128240983002D1C64 /* CoreLocation.framework */,
 				1714BFE91E1A870C00626087 /* ExternalAccessory.framework */,
 				17B4ECE61E16B81100E47CA5 /* libdtdev.a */,
 			);
@@ -127,6 +135,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 17B4EBE21E165D3B00E47CA5;
@@ -245,6 +254,10 @@
 				BITCODE_GENERATION_MODE = bitcode;
 				DEVELOPMENT_TEAM = 44HY3E3285;
 				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/react-native-linea",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/node_modules/react-native/React/**",
 					"S(SRCROOT)/**",
@@ -268,6 +281,10 @@
 				BITCODE_GENERATION_MODE = bitcode;
 				DEVELOPMENT_TEAM = 44HY3E3285;
 				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/react-native-linea",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/node_modules/react-native/React/**",
 					"S(SRCROOT)/**",

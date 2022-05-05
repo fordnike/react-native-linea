@@ -15,6 +15,6 @@ s.source_files         = '*.{h,m}','react-native-linea/*.{h,m}'
 s.requires_arc         = true
 s.platforms            = { :ios => "9.0" }
 s.vendored_libraries   = 'libdtdev.a'
-s.frameworks           = 'ExternalAccessory', 'CoreLocation'
+s.frameworks           = 'ExternalAccessory', 'CoreLocation','infineaSDK'
 s.dependency           'React'
 end
