@@ -16,6 +16,6 @@ s.requires_arc         = true
 s.platforms            = { :ios => "9.0" }
 s.vendored_libraries   = 'libdtdev.a'
 s.frameworks           = 'ExternalAccessory', 'CoreLocation','infineaSDK'
-spec.ios.frameworks           = 'Frameworks/infineaSDK.framework'
+s.ios.vendored_frameworks = 'Frameworks/infineaSDK.framework'
 s.dependency           'React'
 end
